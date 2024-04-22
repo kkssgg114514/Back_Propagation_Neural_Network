@@ -77,3 +77,18 @@ vector<Sample> Utils::getTestData(const string& filename)
     }
     return res;
 }
+
+void Utils::OutputToFile(vector<double>* outData, const string& filename)
+{
+    std::ofstream in(filename, std::ios::out | std::ios::app);
+
+    if (in.is_open())
+    {
+        //不断写入文件
+        for (auto x : *outData)
+        {
+            in << int(x + 0.5) << "\n";
+        }
+        in.close();
+    }
+}

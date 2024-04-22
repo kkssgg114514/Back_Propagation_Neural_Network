@@ -5,7 +5,8 @@
 using std::cout;
 using std::endl;
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[]) 
+{
 
     //创建网络对象
     Net net;
@@ -19,7 +20,8 @@ int main(int argc, char* argv[]) {
     //用神经网络预计样本
     const vector<Sample> testDataSet = Utils::getTestData("data/test.txt");
     vector<Sample> predSet = net.predict(testDataSet);
-    for (auto& pred : predSet) {
+    for (auto& pred : predSet) 
+    {
         pred.display();
     }
 

@@ -292,16 +292,5 @@ Sample::Sample(const vector<double>& feature, const vector<double>& label)
 
 void Sample::display() 
 {
-    std::cout<<"input : ";
-    for (auto& x : in)
-    {
-        std::cout << x << " ";
-    }
-    puts("");
-    printf("output: ");
-    for (auto& y : out)
-    {
-        std::cout << y << " ";
-    }
-    puts("");
+    Utils::OutputToFile(&out, "data\\res.txt");
 }

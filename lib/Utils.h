@@ -22,4 +22,7 @@ namespace Utils
 
     //接收测试数据（已训练）
     vector<Sample> getTestData(const string& filename);
+
+    //输出数据
+    void OutputToFile(vector<double>* outData, const string& filename);
 }

@@ -2,8 +2,8 @@
 
 namespace Config
 {
-	const size_t INNODE = 2;    //输入层节点数
-	const size_t HIDE0NODE = 4;  //隐藏层节点数，一般大于输入层
+	const size_t INNODE = 41;    //输入层节点数
+	const size_t HIDE0NODE = 50;  //隐藏层节点数，一般大于输入层
 	const size_t OUTNODE = 1;   //输出层节点数
 
 	const double rate = 0.8f; //步长
