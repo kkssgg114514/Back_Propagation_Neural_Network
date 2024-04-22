@@ -25,4 +25,9 @@ namespace Utils
 
     //输出数据
     void OutputToFile(vector<double>* outData, const string& filename);
+
+    //输出数据
+    void OutputToFile0(vector<double>* outData, const string& filename);
+
+    void OutSpace(const string& filename);
 }

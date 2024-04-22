@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <string>
 #include "Config.h"
 
 using std::vector;
@@ -56,4 +57,6 @@ public:
     Sample predict(const vector<double>& feature);
 
     vector<Sample> predict(const vector<Sample>& predictDataSet);
+
+    void WeightToFile();
 };

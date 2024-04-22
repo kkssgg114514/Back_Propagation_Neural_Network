@@ -11,84 +11,113 @@
 
 vector<double> Utils::getFileData(const string& filename)
 {
-    std::vector<double> res;
+	std::vector<double> res;
 
-    std::ifstream in(filename);
-    //判断是否打开成功
-    if (in.is_open())
-    {
-        //不断读取文件数据
-        while (!in.eof())
-        {
-            //暂时从文件写入缓冲区
-            double buffer;
-            in >> buffer;
-            res.push_back(buffer);
-        }
-        //关闭文件
-        in.close();
-    }
-    else
-    {
-        //打开失败
-        std::cout << "打开文件失败:" << filename << std::endl;
-    }
-    return res;
+	std::ifstream in(filename);
+	//判断是否打开成功
+	if (in.is_open())
+	{
+		//不断读取文件数据
+		while (!in.eof())
+		{
+			//暂时从文件写入缓冲区
+			double buffer;
+			in >> buffer;
+			res.push_back(buffer);
+		}
+		//关闭文件
+		in.close();
+	}
+	else
+	{
+		//打开失败
+		std::cout << "打开文件失败:" << filename << std::endl;
+	}
+	return res;
 }
 
 vector<Sample> Utils::getTrainData(const string& filename)
 {
-    std::vector<Sample> res;
+	std::vector<Sample> res;
 
-    std::vector<double> buffer = getFileData(filename);
+	std::vector<double> buffer = getFileData(filename);
 
-    //循环读入训练数据，输入输出数量不固定，每次跳转数量根据输入输出数量决定
-    for (size_t i = 0; i < buffer.size(); i += Config::INNODE + Config::OUTNODE)
-    {
-        Sample tmp;
-        for (size_t t = 0; t < Config::INNODE; t++)
-        {
-            tmp.in.push_back(buffer.at(i + t));
-        }
-        for (size_t t = 0; t < Config::OUTNODE; t++)
-        {
-            tmp.out.push_back(buffer.at(i + Config::INNODE + t));
-        }
-        res.push_back(tmp);
-    }
-    return res;
+	//循环读入训练数据，输入输出数量不固定，每次跳转数量根据输入输出数量决定
+	for (size_t i = 0; i < buffer.size() - 1; i += Config::INNODE + Config::OUTNODE)
+	{
+		Sample tmp;
+		for (size_t t = 0; t < Config::INNODE; t++)
+		{
+			tmp.in.push_back(buffer.at(i + t));
+		}
+		for (size_t t = 0; t < Config::OUTNODE; t++)
+		{
+			tmp.out.push_back(buffer.at(i + Config::INNODE + t));
+			//std::cout << i << std::endl;
+		}
+		res.push_back(tmp);
+	}
+	return res;
 }
 
 vector<Sample> Utils::getTestData(const string& filename)
 {
-    std::vector<Sample> res;
+	std::vector<Sample> res;
 
-    std::vector<double> buffer = getFileData(filename);
+	std::vector<double> buffer = getFileData(filename);
 
-    //循环读入测试数据，输入数量不固定，每次跳转数量根据输入数量决定
-    for (size_t i = 0; i < buffer.size(); i += Config::INNODE)
-    {
-        Sample tmp;
-        for (size_t t = 0; t < Config::INNODE; t++)
-        {
-            tmp.in.push_back(buffer.at(i + t));
-        }
-        res.push_back(tmp);
-    }
-    return res;
+	//循环读入测试数据，输入数量不固定，每次跳转数量根据输入数量决定
+	for (size_t i = 0; i < buffer.size(); i += Config::INNODE)
+	{
+		Sample tmp;
+		for (size_t t = 0; t < Config::INNODE; t++)
+		{
+			tmp.in.push_back(buffer.at(i + t));
+		}
+		res.push_back(tmp);
+	}
+	return res;
 }
 
 void Utils::OutputToFile(vector<double>* outData, const string& filename)
 {
-    std::ofstream in(filename, std::ios::out | std::ios::app);
+	std::ofstream in(filename, std::ios::out | std::ios::app);
 
-    if (in.is_open())
-    {
-        //不断写入文件
-        for (auto x : *outData)
-        {
-            in << int(x + 0.5) << "\n";
-        }
-        in.close();
-    }
+	if (in.is_open())
+	{
+		//不断写入文件
+		for (auto x : *outData)
+		{
+			in << int(x + 0.5) << "\n";
+		}
+		in.close();
+	}
+}
+
+void Utils::OutputToFile0(vector<double>* outData, const string& filename)
+{
+	std::ofstream in(filename, std::ios::out | std::ios::app);
+
+	if (in.is_open())
+	{
+		//不断写入文件
+		for (auto x : *outData)
+		{
+			in << x << " ";
+		}
+		in.close();
+	}
+}
+
+void Utils::OutSpace(const string& filename)
+{
+	std::ofstream in(filename, std::ios::out | std::ios::app);
+
+	if (in.is_open())
+	{
+
+		in << "\n";
+
+		in.close();
+	}
 }

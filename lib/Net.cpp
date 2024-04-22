@@ -276,6 +276,20 @@ vector<Sample> Net::predict(const vector<Sample>& predictDataSet)
     return predSet;
 }
 
+void Net::WeightToFile()
+{
+    for (int i = 0; i < Config::INNODE; i++)
+    {
+        Utils::OutputToFile0(&inputLayer[i]->weight, "data\\weightin.txt");
+        Utils::OutSpace("data\\weightin.txt");
+    }
+    for (int i = 0; i < Config::HIDE0NODE; i++)
+    {
+        Utils::OutputToFile0(&hiddenLayer[i]->weight, "data\\weighthide.txt");
+        Utils::OutSpace("data\\weighthide.txt");
+    }
+}
+
 Node::Node(size_t nextLayerSize) 
 {
     weight.resize(nextLayerSize);
